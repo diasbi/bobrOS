@@ -18,12 +18,12 @@
     <ClCompile Include="bobrOS.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Dependencies\MSP\tinyexpr.c">
+    <ClCompile Include="tinyexpr.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Dependencies\MSP\tinyexpr.h">
+    <ClInclude Include="tinyexpr.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

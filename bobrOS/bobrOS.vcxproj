@@ -146,11 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Dependencies\MSP\tinyexpr.c" />
     <ClCompile Include="bobrOS.cpp" />
+    <ClCompile Include="tinyexpr.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Dependencies\MSP\tinyexpr.h" />
+    <ClInclude Include="tinyexpr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

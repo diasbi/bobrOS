@@ -5,7 +5,16 @@
 #include <windows.h> 
 #include "tinyexpr.h"
 using namespace std;
-
+int availableusrs = 0;
+int userselected = 0;
+string inputCharacter = " >";
+//const char* users[10] = {"defaultUser", "secondUser", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+//string user = "defaultUser";
+class UserClass {
+public:
+	//usrdata
+	string name, color = "color 0F", inputchar = " >", password;
+};
 void helpinfo(bool isStart, string username) {
 	if (!isStart) {
 		cout << "sett  Settings comand" << endl;
@@ -20,21 +29,32 @@ void helpinfo(bool isStart, string username) {
 		cout << "function helpinfo() is loaded" << endl;
 	}
 }
-void secretbobrik(bool isStart, string username) {
-	cout << u8"...............................................::-=+**######**+=-::.......................\n";
+UserClass defaultUser;
+UserClass User2;
+UserClass User3;
+UserClass User4;
+UserClass User5;
+UserClass User6;
+UserClass User7;
+UserClass User8;
+UserClass User9;
+UserClass User10;
+UserClass users[10] = { defaultUser, User2, User3, User4, User5, User6, User7, User8, User9, User10 };
+void secretlogo(bool isStart, string username) {
+	cout << u8"................................................-=+**######**+=-........................\n";
 	cout << u8"............................................:-+*##**************##*+-:....................\n";
 	cout << u8"..........................................:+##**********************#*=:..................\n";
 	cout << u8"........................................:+##*********************#######=:................\n";
 	cout << u8"......................................:=##********************#####**##*##-...............\n";
 	cout << u8".....................................:*#**************#*****#%#*******#*#%%-..............\n";
 	cout << u8"....................................:##***********#**##*****#%##%%%#**#*%%%-..............\n";
-	cout << u8"...................................:##************####********#%%%%%#*#*%%*-:::::.........\n";
-	cout << u8"..............................:-+**##*****************#*+=******##%%%*###*+=:::::.........\n";
-	cout << u8"..............................:#****##***************+==++=+*******###***+==:::::.........\n";
-	cout << u8"..............................:-+++##***************++*+=+*+-+****#*=::::***-::...........\n";
-	cout << u8".................................:=#*****************+=+**+-*####=::::::-**#-:::..........\n";
-	cout << u8"...::=+*****++=::................-#***********************=******-::::::+**#=.............\n";
-	cout << u8"..-*#####***####*=:.............-#*******************************=:::::=***#=.............\n";
+	cout << u8"...................................:##************####********#%%%%%#*#*%%*-..:.........\n";
+	cout << u8"..............................:-+**##*****************#*+=******##%%%*###*+=..:.........\n";
+	cout << u8"..............................:#****##***************+==++=+*******###***+==..:.........\n";
+	cout << u8"..............................:-+++##***************++*+=+*+-+****#*=..***-............\n";
+	cout << u8".................................:=#*****************+=+**+-*####=...-**#-.:..........\n";
+	cout << u8"....=+*****++=.................-#***********************=******-...+**#=.............\n";
+	cout << u8"..-*#####***####*=:.............-#*******************************=..:=***#=.............\n";
 	cout << u8":=#***#############=:..........:##*****************************************#+.............\n";
 	cout << u8"-#***##***##****##*#*:........:*#******************************************#+.............\n";
 	cout << u8"*#**##***##****##***#*:.......=#***********************##****+=----=+**#***##:............\n";
@@ -54,10 +74,10 @@ void secretbobrik(bool isStart, string username) {
 	cout << u8"..........:-+##****##**#######******************##**#**#*##+=+++=---------=##*******##*+=:\n";
 	cout << u8".............:=+#######**#***##****************##***##**######*=---------=#*********##*=-:\n";
 	cout << u8"................:-=*###**#****##***************%**********#*=------------#*******#*+-:....\n";
-	cout << u8"....................::-=+**########***********#%********#*=-------------=#****##+-:.......\n";
-	cout << u8"...........................:::::--=+###********%******##=--==========----*###+-:..........\n";
-	cout << u8"....................................::-=++**#####*****#*----:::::::......::::.............\n";
-	cout << u8"............................................::::=##**##-..................................\n";
+	cout << u8".....................-=+**########***********#%********#*=-------------=#****##+-:.......\n";
+	cout << u8".............................:--=+###********%******##=--==========----*###+-:..........\n";
+	cout << u8".....................................-=++**#####*****#*----...:.....................\n";
+	cout << u8"..............................................=##**##-..................................\n";
 	cout << "bobr\n";
 	Sleep(5000);
 	system("cls");
@@ -65,7 +85,7 @@ void secretbobrik(bool isStart, string username) {
 }
 void settings(bool isStart, string username) {
 	if (!isStart) {
-		cout << "Settings\nTo change bacroung and foreground color, press 1\nTo change languge, press 2\nTo exit, press Esc\n";
+		cout << "Settings\n-------------------------------------------------\nTo change bacroung and foreground color, press 1 |\nTo change languge, press 2	        	 |\nTo change username, press 3                      |\nTo exit, press esc	        		 |\n-------------------------------------------------\n";
 		int ch;
 		ch = _getch();
 		if (ch == 27)return;
@@ -78,10 +98,19 @@ void settings(bool isStart, string username) {
 			cin >> fgclr;
 			string chose = bgclr + fgclr;
 			string finalclr = "color " + chose;
+			users[userselected].color = finalclr;
 			system(finalclr.c_str());
 		}
 		if (ch == 50) {
+		
 			cout << "change";
+		}
+		if (ch == 51) {
+			//user = "r";
+			//return username;
+			cin >> users[userselected].name;
+			username = users[userselected].name;
+			cout << "Changeg username to " << users[userselected].name;
 		}
 		cout << endl;
 	}
@@ -154,8 +183,72 @@ void pause(bool isStart, string username) {
 		cout << "function pauses() is loaded" << endl;
 	}
 }
-
-int main() {
+int selectusrs() {
+	system("color 0F");
+	int ch = 0;
+	int slcusr = 0;
+	while (ch != 13) {
+		availableusrs = 0;
+		cout << "SELECT USER:\n\n";
+		for (int usr = 0; usr < 10; usr++) {
+			if (users[usr].name != "") {
+				cout << users[usr].name;
+				if (slcusr == usr) {
+					cout << " <";
+				}
+				//printf("  \nThe Enter character is:  %c", _getch());
+				cout << "\n";
+				availableusrs++;
+			}//13
+		}
+		//cout << availableusrs << "H" << slcusr << "\n";
+		ch = _getch();
+		if (ch == 80 && slcusr < availableusrs - 1) {
+			slcusr++;
+		}
+		if (ch == 72 && slcusr > 0) {
+			slcusr--;
+		}
+		system("cls");
+		//cout << ch;
+	}
+	if (users[slcusr].password != "") {
+		cout << "Enter password for " << users[slcusr].name << "\n";
+		int d = 1;
+		for (d; d <= 10; d++) {
+			string passwordinput;
+			char temp = 0;
+			while (true) {
+				temp = _getch();
+				if (temp == 13)
+					break;
+				if ((int)temp == 8) {
+					passwordinput = passwordinput.substr(0, passwordinput.length() - 1);
+					system("cls");
+					cout << "Enter password for " << users[slcusr].name << "\n";
+					for(int pl=0; pl < passwordinput.length(); pl++){ cout << "*"; }
+				}
+				else {
+					passwordinput = passwordinput + temp;
+					cout << "*";
+				}
+			}
+			//cout << passwordinput;
+			//cin >> passwordinput;
+			if (passwordinput != users[slcusr].password)cout << "\nIncorect password! You have "<<10-d<<" attempt(s) left\n";
+			else break;
+		}
+		if (d >= 10) {
+			system("cls");
+			selectusrs();
+		}
+	}
+	system("cls");
+	userselected = slcusr;
+	return slcusr;
+}
+void mkernel(string username) {
+	system(users[userselected].color.c_str());
 	//Sleep(100);
 	cout << " _       _       _____ _____ \n"
 			"| |_ ___| |_ ___|     |   __|\n"
@@ -163,7 +256,7 @@ int main() {
 			"|___|___|___|_| |_____|_____|\n";
 	cout << "-------made by diasbi-------" << endl;
 	Sleep(500);
-	settings(true,"system");
+	settings(true, "system");
 	Sleep(75);
 	calc(true, "system");
 	Sleep(75);
@@ -179,28 +272,38 @@ int main() {
 	int bgclr = 0;
 	int fntclr = 7;
 	bool run = true;
-	string user = "defaultUser";
 	string command;
-	string inputCharacter = ">";
-	typedef void (*FnPtr)(bool,string);
+	typedef void (*FnPtr)(bool, string);
 	map<string, FnPtr> Cmnds;
 	Cmnds["sett"] = settings;
 	Cmnds["calc"] = calc;
 	Cmnds["clear"] = clear;
+	Cmnds["clr"] = clear;
 	Cmnds["help"] = helpinfo;
 	Cmnds["pause"] = pause;
-	Cmnds["secretbobr"] = secretbobrik;
+	Cmnds["secretbobr"] = secretlogo;
 	while (run) {
-		cout << user << inputCharacter;
+		cout << users[userselected].name << inputCharacter;
 		cin >> command;
-		if (command == "exit") { run = false; break; }
-		if (command == "restart") { system("cls"); main(); break;}
+		if (command == "logout") { system("cls"); mkernel(users[selectusrs()].name); break; }
+		if (command == "exit") { run = false; break;}
+		if (command == "kys") { run = false; break;}
+		if (command == "restart") { system("cls"); mkernel(users[userselected].name); break; }
 		if (Cmnds.count(command)) {
-			Cmnds[command](false, user);
+			Cmnds[command](false, users[userselected].name);
 		}
 		else {
 			cout << "There is no executable command with that name: " << command << "\nFor help type 'help'" << endl;
 			cout << endl;
 		}
 	}
+}
+int main() {
+	users[0].name = "defaultUser";
+	users[1].name = "defaultUser2";
+	users[1].password = "secret";
+	users[1].color = "color 70";
+	//system("pause");22480
+	userselected = selectusrs();
+	mkernel(users[userselected].name);
 }
