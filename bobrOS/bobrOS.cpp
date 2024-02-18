@@ -119,7 +119,33 @@ void clear(bool isStart, string username) {
 		cout << "function clear() is loaded" << endl;
 	}
 }
-
+void changepassword(int slcusr) {
+	cout << "Enter new password for " << users[availableusrs].name << " (leave it blank if don't need password)\n";
+	string passwordinput = "";
+	char temp = 0;
+	while (true) {
+		temp = _getch();
+		if (temp == 13)
+			break;
+		if ((int)temp == 8) {
+			passwordinput = passwordinput.substr(0, passwordinput.length() - 1);
+			system("cls");
+			cout << "Enter password for " << users[slcusr].name << "\n";
+			for (int pl = 0; pl < passwordinput.length(); pl++) { cout << "*"; }
+		}
+		else {
+			passwordinput = passwordinput + temp;
+			cout << "*";
+		}
+	}
+	cout << "Password: " << passwordinput << "\n Press enter to continue, Esc to change password\n";
+	int ch = 0;
+	ch = _getch();
+	if (ch == 27) {
+		changepassword(slcusr);
+	}
+	users[slcusr].password = passwordinput;
+}
 void settings(bool isStart, string username) {
 	if (!isStart) {
 		cout << "Settings\n-------------------------------------------------\nTo change bacroung and foreground color, press 1 |\nTo change languge, press 2	        	 |\nTo change user info, press 3                     |\nTo exit, press esc	        		 |\n-------------------------------------------------\n";
@@ -259,7 +285,7 @@ int selectusrs() {
 	}
 	if (users[slcusr].password != "") {
 		cout << "Enter password for " << users[slcusr].name << "\n";
-		int d = 1;
+		int d = 0;
 		for (d; d <= 10; d++) {
 			string passwordinput;
 			char temp = 0;
@@ -270,6 +296,7 @@ int selectusrs() {
 				if ((int)temp == 8) {
 					passwordinput = passwordinput.substr(0, passwordinput.length() - 1);
 					system("cls");
+					if(d>0)cout << "Incorect password! You have " << 10 - d << " attempt(s) left\n";
 					cout << "Enter password for " << users[slcusr].name << "\n";
 					for (int pl = 0; pl < passwordinput.length(); pl++) { cout << "*"; }
 				}
@@ -280,7 +307,11 @@ int selectusrs() {
 			}
 			//cout << passwordinput;
 			//cin >> passwordinput;
-			if (passwordinput != users[slcusr].password)cout << "\nIncorect password! You have " << 10 - d << " attempt(s) left\n";
+			if (passwordinput != users[slcusr].password) {
+				system("cls");
+				cout << "Incorect password! You have " << 10 - d << " attempt(s) left\n";
+				cout << "Enter password for " << users[slcusr].name << "\n";
+			}
 			else break;
 		}
 		if (d >= 10) {
@@ -290,6 +321,32 @@ int selectusrs() {
 	}
 	if (slcusr == availableusrs) {
 		//TODO: make function that creates user (with oformlenie) unity kys
+		cout << "Enter new user login:\n";
+		cin >> users[availableusrs].name;
+		cout << "Enter password for " << users[availableusrs].name << " (leave it blank if don't need password)\n";
+		string passwordinput = "";
+		char temp = 0;
+		while (true) {
+			temp = _getch();
+			if (temp == 13)
+				break;
+			if ((int)temp == 8) {
+				passwordinput = passwordinput.substr(0, passwordinput.length() - 1);
+				system("cls");
+				cout << "Enter password for " << users[slcusr].name << "\n";
+				for (int pl = 0; pl < passwordinput.length(); pl++) { cout << "*"; }
+			}
+			else {
+				passwordinput = passwordinput + temp;
+				cout << "*";
+			}
+		}
+		cout << "Password: " << passwordinput << "\n Press enter to continue, Esc to change password\n";
+		int ch = 0;
+		ch = _getch();
+		if (ch == 27) {
+			changepassword(slcusr);
+		}
 	}
 	system("cls");
 	userselected = slcusr;
@@ -298,9 +355,9 @@ int selectusrs() {
 void mkernel(string username) {
 	system(users[userselected].color.c_str());
 	cout << " _       _       _____ _____ \n"
-		"| |_ ___| |_ ___|     |   __|\n"
-		"| . | . | . |  _|  |  |__   |\n"
-		"|___|___|___|_| |_____|_____|\n";
+			"| |_ ___| |_ ___|     |   __|\n"
+			"| . | . | . |  _|  |  |__   |\n"
+			"|___|___|___|_| |_____|_____|\n";
 	cout << "bobrOS ver:0.1 made by diasbi" << endl;
 	cout << endl;
 	int bgclr = 0;
@@ -360,7 +417,7 @@ int main() {
 	//GetCpu(str);
 	users[0].name = "defaultUser";
 	users[1].name = "defaultUser2";
-	//users[1].password = "secret";
+	users[1].password = "secret";
 	//users[1].color = "color 70";
 	//system("pause");22480
 	userselected = selectusrs();
